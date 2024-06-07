@@ -18,7 +18,7 @@ installed on your system.
 2. Run ```ant build``` in the root directory of the project to generate the executable JAR (running ```ant``` by itself will additionally generate JavaDoc files and run Junit tests). For just JavaDoc documentation on all the various classes, execute ```ant doc``` in the root directory. 
 
 ## Usage
-Having successfully built the JAR file, you can run ```java -jar out/jar/GrowMansSky.jar -h``` or ```java -jar out/jar/Grow_mans_sky.jar --help``` to receive the following help page:
+Having successfully built the JAR file, you can run ```java -jar out/jar/Grow_mans_sky.jar -h``` or ```java -jar out/jar/Grow_mans_sky.jar --help``` to receive the following help page:
 ```
 usage: java -jar out/jar/Grow_mans_sky.jar [-c <FILE>] [-con <HOST>] [-d
        <DELAY>] [-g] [-h] [-ll <LEVEL>] [-p <PORT>] [-pc <COLOR ...>] [-pn
@@ -59,7 +59,7 @@ Implemented optional features:
   - SOUNDEFFECTS
   - SCREENSHOTS
 ```
-Just running ```java -jar out/jar/GrowMansSky.jar``` without any options will start the default game consisting of:
+Just running ```java -jar out/jar/Grow_mans_sky.jar``` without any options will start the default game consisting of:
 
 - 4 Human players,
 - names Player 1, Player 2, Player 3, Player 4
@@ -99,7 +99,7 @@ For network gaming, player on the server side has to start the game first by spe
 
 will enable a server to play on with the remote client being played by Nils who, on his machine, executes the following command
 
-```java -jar out/jar/GrowMansSky.jar -pt HUMAN -pn Nils -con <hostname>```
+```java -jar out/jar/Grow_mans_sky.jar -pt HUMAN -pn Nils -con <hostname>```
 
 The default port for the connection is 6600, you can specify a different one with the ```-p``` flag. The flags ```-d``` and ```-g``` are only relevant for
 games against a RANDOM_AI player. The former will make the AI wait for a specified amount of time after its move and the latter will show a GUI even when there are no HUMAN players in the game (highly recommended to
@@ -115,4 +115,4 @@ Thanks to:
 
 for working on this project!
 
-_README written by Maxim Strzebkowski, usage guide written by Jonas Härtner_
+_README written by Maxim Strzebkowski, updated by Nils Wüstefeld, usage guide written by Jonas Härtner_
