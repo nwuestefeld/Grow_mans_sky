@@ -1,0 +1,90 @@
+<!-- Author: Maxim Strzebkowski -->
+<project default="main">
+    <description>
+        build file designed to build, compile and create the documentation for the project
+    </description>
+    <!--The variables defined for the XML-->
+    <property name="source.dir" location="src/main/java"/>
+    <property name="out.dir" location="out"/>
+    <property name="lib.dir" location="lib" />
+    <property name="classes.dir" location="${out.dir}/classes"/>
+    <property name="jar.dir" location="${out.dir}/jar"/>
+    <property name="doc.dir" location="${out.dir}/doc"/>
+    <property name="test.dir" location="src/test/java"/>
+    <property name="test-classes.dir" location="${out.dir}/test-classes"/>
+    <property name="test-reports.dir" location="${out.dir}/test-reports"/>
+    <property name="main.class" value="bauernhof.main.Main"/>
+
+    <!-- Include the jars inside the lib folder -->
+    <path id="classpath">
+        <pathelement location="${classes.dir}"/>
+        <pathelement location="${test-classes.dir}"/>
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+    </path>
+
+    <!--Deletes the output directory for a clean build-->
+    <target name="clean">
+        <delete dir="${out.dir}"/>
+    </target>
+
+    <!-- Generate javadocs for current project into ${doc.dir} -->
+    <target name="doc" description="generate documentation">
+        <mkdir dir="${doc.dir}"/>
+        <javadoc packagenames="bauernhof.*" sourcepath="${source.dir}" destdir="${doc.dir}" access="private" classpathref="classpath">
+            <fileset dir="${source.dir}">
+                <include name="**" />
+           </fileset>
+        </javadoc>
+    </target>
+
+    <!-- Compile the source code into classes -->
+    <target name="compile">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${source.dir}" destdir="${classes.dir}" classpathref="classpath"/>
+    </target>
+
+    <!-- Compile test classes -->
+    <target name="compile-tests"> <!-- removed dependency "compile" to run ant without test directories -jh -->
+        <mkdir dir="${test-classes.dir}"/>
+        <javac srcdir="${test.dir}" destdir="${test-classes.dir}" classpathref="classpath"/>
+    </target>
+
+
+    <!-- run all tests on the compiled classes -->
+    <target name="test" depends="compile-tests">
+        <mkdir dir="${test-reports.dir}"/>
+        <junit printsummary="yes" haltonfailure="no">
+            <classpath refid="classpath"/>
+            <formatter type="xml"/>
+            <batchtest fork="yes" todir="${test-reports.dir}">
+                <fileset dir="${test.dir}">
+                    <include name="**/*Test.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <!-- Package classes and the dependencies inside ${lib.dir} into a jar (only if tests pass) -->
+    <target name="jar" depends="compile">
+        <mkdir dir="${jar.dir}"/>
+        <!--No main class yet! => jar is not runnable-->
+        <jar destfile="${jar.dir}/GrowMansSky.jar" basedir="${classes.dir}">
+            <!--Include the lib directory inside the output jar file-->
+            <zipgroupfileset dir="${lib.dir}" includes="*.jar" excludes="**/junit-*.jar, **/hamcrest-*.jar"/>
+            <!--Define the main class used for the jar-->
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!--run the jar-->
+    <target name="run" depends="jar">
+        <java jar="${jar.dir}/GrowMansSky.jar" fork="true"/>
+    </target>
+
+    <target name="build" depends="jar"></target>
+
+    <target name="main" depends="clean,doc,jar"></target> <!-- removed dependency "test" -->
+
+</project>
