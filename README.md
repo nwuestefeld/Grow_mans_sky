@@ -14,13 +14,13 @@ Make sure that you have at least
 installed on your system.
 
 ## Installation
-1. Download the project files or clone the Git repository onto your system by using ```git clone https://github.com/nwuestefeld/Grow_man_sky.git```
+1. Download the project files or clone the Git repository onto your system by using ```git clone https://github.com/nwuestefeld/Grow_mans_sky.git```
 2. Run ```ant build``` in the root directory of the project to generate the executable JAR (running ```ant``` by itself will additionally generate JavaDoc files and run Junit tests). For just JavaDoc documentation on all the various classes, execute ```ant doc``` in the root directory. 
 
 ## Usage
-Having successfully built the JAR file, you can run ```java -jar out/jar/GrowMansSky.jar -h``` or ```java -jar out/jar/Grow_man_sky.jar --help``` to receive the following help page:
+Having successfully built the JAR file, you can run ```java -jar out/jar/GrowMansSky.jar -h``` or ```java -jar out/jar/Grow_mans_sky.jar --help``` to receive the following help page:
 ```
-usage: java -jar out/jar/GrowMansSky.jar [-c <FILE>] [-con <HOST>] [-d
+usage: java -jar out/jar/Grow_mans_sky.jar [-c <FILE>] [-con <HOST>] [-d
        <DELAY>] [-g] [-h] [-ll <LEVEL>] [-p <PORT>] [-pc <COLOR ...>] [-pn
        <NAME ...>] [-pt <TYPE ...>] [-v <VOLUME>]
 
